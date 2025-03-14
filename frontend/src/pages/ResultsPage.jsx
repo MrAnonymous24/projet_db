@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme } from "@mui/material/styles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DescriptionIcon from "@mui/icons-material/Description";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { AppProvider } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom"; // Single import
@@ -32,6 +33,11 @@ const NAVIGATION = [
     segment: "results",
     title: "Notes",
     icon: <DescriptionIcon />,
+  },
+  {
+    segment: "connexion",
+    title: "Deconnexion",
+    icon: <LogoutIcon />,
   },
 ];
 
@@ -126,7 +132,7 @@ function DemoPageContent({ pathname }) {
   return (
     <Box
       sx={{
-        py: 4,
+        py: 5,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -134,11 +140,10 @@ function DemoPageContent({ pathname }) {
       }}
     >
       <Typography variant="h4" gutterBottom>
-        Page actuelle : {pathname}
+        Le note des etudients
       </Typography>
       <section>
-        <Typography variant="h5">Examen de Mathématiques</Typography>
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 'auto', width: '100%' }}>
           <DataGrid rows={rows} columns={columns} />
         </div>
       </section>

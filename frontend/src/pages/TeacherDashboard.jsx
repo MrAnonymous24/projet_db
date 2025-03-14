@@ -2,9 +2,13 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActionArea from "@mui/material/CardActionArea";
 import { createTheme } from "@mui/material/styles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DescriptionIcon from "@mui/icons-material/Description";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { AppProvider } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
@@ -28,6 +32,12 @@ const NAVIGATION = [
     segment: "results",
     title: "Notes",
     icon: <DescriptionIcon />,
+  },
+  {
+    segment: "connexion",
+    title: "Deconnexion",
+    icon: <LogoutIcon />,
+    style: { position: "fixed", bottom: 0, width: "100%" },
   },
 ];
 
@@ -53,12 +63,31 @@ function DemoPageContent({ pathname }) {
       sx={{
         py: 4,
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        flexWrap: "wrap",
+        gap: 2,
+        justifyContent: "center",
         textAlign: "center",
       }}
     >
-      <Typography>Dashboard content for {pathname}</Typography>
+      {NAVIGATION.filter((item) => item.segment && item.segment !== "connexion").map((item, index) => (
+        <Card key={index} sx={{ width: 300 }}>
+          <CardActionArea>
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {item.icon}
+              <Typography variant="h6" sx={{ mt: 2 }}>
+                {item.title}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      ))}
     </Box>
   );
 }

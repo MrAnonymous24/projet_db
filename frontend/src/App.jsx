@@ -5,8 +5,22 @@ import TeacherDashboard from "./pages/TeacherDashboard";
 import ExamPage from "./pages/ExamPage";
 import ResultsPage from "./pages/ResultsPage";
 import EtudientsPage from "./pages/EtudientsPage";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const App = () => {
+function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Faire une requête GET vers le backend
+    axios.get('http://localhost:5000/api/data')
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the data!', error);
+      });
+  }, []);
   return (
     <Router>
       <Routes>
